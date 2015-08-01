@@ -14,7 +14,7 @@
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
-        <td><%= link_to topic.name, topic %></td>
+        <td><%= link_to "Vote on " + topic.name, topic %></td>
         <td><%= topic.submissions.count %></td>
         <td><%= link_to "Stats", topic_stats_url(topic), class: "btn btn-itt" %></td>
         <% if false%>
