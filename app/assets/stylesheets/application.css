@@ -520,7 +520,7 @@ z-index: 2;
   white-space:nowrap;
 }
 
- .lumii-header{
+ .itt-header{
   color: white;
   min-height: 266px;
   margin-top: -20px;
@@ -532,7 +532,7 @@ z-index: 2;
 
 /* background: rgba(126, 211, 33,0.7); */
   
- .lumii-header-overlay{
+ .itt-header-overlay{
   background: rgba(102, 189, 92,0.9);
   overflow: hidden;
   height: 100%;
@@ -612,18 +612,18 @@ select {
     height: 34px !important;
 }
 
-.lumii-green{
+.itt-green{
   color: #66BD5C;
 }
 
-.btn-lumii {
+.btn-itt {
   color: #ffffff;
   background-color: #66BD5C;
   border-color: #66BD5C;
   border-radius: 0px !important;
 }
 
-.btn-lumii:hover {
+.btn-itt:hover {
   color: #ffffff !important;
   background-color: #9be34c;
 }
