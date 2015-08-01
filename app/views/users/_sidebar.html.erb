@@ -1,0 +1,23 @@
+<div id='left-sidebar' class='sidebar'>
+  <ul class='dropdown-menu' style="display: block; position: static; width: 100%;">
+    <li class='border-bottom'>
+      <a href='<%= votes_url %>'><span class='sidebar-link'><i class='fa fa-user'></i> My Profile</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="<%= votes_url %>">My Vote History</a>
+    </li>
+    <li>
+       <a href="<%= user_my_submissions_url(current_user) %>">My Submissions</a> 
+    </li>
+    <li>
+       <a href="<%= topics_url %>">Judge Submissions</a> 
+    </li>
+    <% if false %>
+      <li>
+        <a href="<%= user_change_password_url(current_user) %>">Change Password</a>
+      </li>
+    <% end%>
+  </ul>
+</div>

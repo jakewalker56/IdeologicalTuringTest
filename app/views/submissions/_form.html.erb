@@ -1,0 +1,40 @@
+<%= form_for(@submission) do |f| %>
+  <% if @submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+      <ul>
+      <% @submission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="row">
+    <div class="form-group col-md-6 col-md-offset-3 no-pad-right">
+     <%= f.collection_select :topic_id, Topic.all, :id, :name,  { prompt: "Select Topic"}, {:onChange=>"javascript: this.form.submit();", class: 'form-control' } %>
+    </div>  
+  </div>
+  
+  <% if @submission.topic.present? %>
+    <div class="row">
+      <div class="form-group col-md-6 col-md-offset-3 no-pad-right">
+        <%= f.collection_select :professed_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Submitting as..." %>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="form-group col-md-6 col-md-offset-3 no-pad-right">
+        <%= f.collection_select :true_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Actual Belief..." %>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="form-group col-md-8 col-md-offset-2 no-pad-right">
+         <%= f.text_area :content, size: "80x20" %>
+      </div>
+    </div> 
+    <div class="actions">
+      <%= f.submit "Submit", class: 'btn btn-lumii pull-right' %>
+    </div>
+  <% end %>
+<% end %>

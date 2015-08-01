@@ -1,0 +1,18 @@
+<h3><%= @topic.name %></h3>
+<table class='table table-bordered table-hover table-white'>
+	<tr>
+		<th>Position</th>
+		<th>Total Submissions</th>
+		<th>Submissions submitted as true belief</th>
+	</tr>
+	<% @topic.topic_options.each do |to| %>
+		<tr>
+			<td><%= link_to to.value, topic_url(@topic, topic_option_id: to.id) %></td>
+			<td><%= @topic.submissions.select{|s| s.professed_topic_option == to}.count %></td>
+			<td><%= @topic.submissions.select{|s| s.professed_topic_option == to && s.true_topic_option == to}.count %></td>
+		</tr>
+	<% end %>
+</table>
+<% if true %>
+	<%= link_to 'Edit Topic', edit_topic_path(@topic) %>
+<% end %>

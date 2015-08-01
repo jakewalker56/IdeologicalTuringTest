@@ -1,0 +1,31 @@
+<h1>My Votes</h1>
+
+<table class='table table-bordered table-hover table-white'>
+  <thead>
+    <tr>
+      <th>Submission</th>
+      <th>My Vote</th>
+      <th>My Confidence</th>
+      <th>Correct Answer</th>
+      <th>Percentage of correct voters</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @votes.each do |vote| %>
+      <tr>
+        <td><%= link_to "Submission #{vote.submission.id}", submission_url(vote.submission) %></td>
+        <% if vote.overall_vote == vote.submission.true_topic_option %>
+          <td class="green-text"><%= vote.overall_vote.value %></td>
+        <% else %>
+          <td class="red-text"><%= vote.overall_vote.value %></td>
+        <% end %>
+        <td><%= vote.confidence %></td>
+        <td><%= vote.submission.true_topic_option.value %></td>
+        <td><%= vote.submission.percentage_of_correct_votes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
