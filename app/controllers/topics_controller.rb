@@ -2,6 +2,7 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!
   
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :double_set_topic, only: [:stats]
 
   # GET /topics
   # GET /topics.json
@@ -70,6 +71,10 @@ class TopicsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
       @topic = Topic.find(params[:id])
+    end
+
+    def double_set_topic
+      @topic = Topic.find(params[:topic_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

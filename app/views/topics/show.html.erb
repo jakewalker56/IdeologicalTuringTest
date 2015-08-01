@@ -1,5 +1,6 @@
+<%= link_to "See Topic Stats", topic_stats_url(@topic), class: "btn btn-itt" %>
 <% if @topic_option.present? %>
 	<%= render 'show_one_topic_option' %>
 <% else %>
-	<%= render 'show_all_topic_options' %>
+	<%= render 'show_all_topic_options', spoiler: true %>
 <% end %>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :topics do
+    get '/stats' => 'topics#stats', as: "stats"
   end
   resources :submissions
 
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   resources :votes
   resources :users do
     get '/my_submissions' => 'submissions#my_submissions', as: "my_submissions"
-    get 'change_password' => 'users#change_password', as: 'change_password'
+    #get '/change_password' => 'users#change_password', as: 'change_password'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

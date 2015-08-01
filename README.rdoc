@@ -1,28 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+===Introduction
+IdeologicalTuringTest is a bare bones application to run a blind test in which users submit essays from a perspective that they may or may not agree with.  Other users then judge these submissions and try to determine if the submitter was telling their own side, or the other side.  See https://en.wikipedia.org/wiki/Ideological_Turing_Test for more details
 
-Things you may want to cover:
+===Limitations
+So, so many.  No admin accounts, poor security, ugly... someone should probably fix some of that.
 
-* Ruby version
+Basically, this app assumes everyone is acting in good faith, which is totally how the internet works.  A sufficiently motivated attacker could curl us with a few DELETE http packets and wreak some havoc.
 
-* System dependencies
+We really ought to have some ownership structure behind topics, but right now anyone can create, edit, destroy, etc. any of them if they go url spelunking.
 
-* Configuration
+We also randomize the order you are shown un-judged submissions... but then the sequential id number is in the url.  Soooo, that's kind of silly.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Mobile support is... basically not there.  I'm not a front end guy.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+

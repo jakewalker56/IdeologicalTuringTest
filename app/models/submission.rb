@@ -31,10 +31,10 @@ class Submission < ActiveRecord::Base
 		end
 	end
 	def correct_votes
-		votes.select{|v| v.overall_vote == true_topic_option.id}
+		votes.select{|v| v.overall_vote == true_topic_option}
 	end
 	def incorrect_votes
-		votes.select{|v| v.overall_vote != true_topic_option.id}
+		votes.select{|v| v.overall_vote != true_topic_option}
 	end
 	def has_correct_votes
 		return correct_votes.count > 0

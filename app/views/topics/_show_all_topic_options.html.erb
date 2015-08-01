@@ -9,7 +9,11 @@
 		<tr>
 			<td><%= link_to to.value, topic_url(@topic, topic_option_id: to.id) %></td>
 			<td><%= @topic.submissions.select{|s| s.professed_topic_option == to}.count %></td>
-			<td><%= @topic.submissions.select{|s| s.professed_topic_option == to && s.true_topic_option == to}.count %></td>
+			<% if spoiler%>
+				<td><span class="spoiler" style="width: 80px; float: left;"><%= @topic.submissions.select{|s| s.professed_topic_option == to && s.true_topic_option == to}.count %></span></td>
+			<% else %>
+				<td><%= @topic.submissions.select{|s| s.professed_topic_option == to && s.true_topic_option == to}.count %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>

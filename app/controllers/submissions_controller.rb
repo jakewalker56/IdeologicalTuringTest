@@ -50,6 +50,9 @@ class SubmissionsController < ApplicationController
   # PATCH/PUT /submissions/1
   # PATCH/PUT /submissions/1.json
   def update
+    if @submission.user_id != current_user.id
+      redirect_to :back, "don't be an ass"
+    end
     respond_to do |format|
       submit = true
       new_topic = Topic.find(submission_params[:topic_id].to_i)
