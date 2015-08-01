@@ -13,6 +13,51 @@
 		</tr>
 	<% end %>
 </table>
-<% if true %>
+
+<table class='table table-bordered table-hover table-white'>
+	<tr>
+		<th>ID</th>
+		<th>Total Votes</th>
+		<% @topic.topic_options.each do |to| %>
+			<th><%= to.value %> votes</th>
+		<% end %>
+		<th>Your Vote</th>
+		<th>Actual Belief</th>
+	</tr>
+	<% @topic.voted_submissions(current_user).each do |submission| %>
+		<tr>
+			<td><%= link_to submission.id, submission_url(submission) %></td>
+			<td><%= submission.votes.count %></td>
+			<% @topic.topic_options.each do |to| %>
+				<td><%= submission.votes.select{|v| v.overall_vote_id == to.id}.count %></td>
+			<% end %>
+			<td>
+				<% if submission.true_topic_option == current_user.votes.where(submission_id: submission.id).first.overall_vote %>
+					<p class="green-text">
+				<% else %>
+					<p class="red-text">
+				<% end %>
+
+				<%= current_user.votes.where(submission_id: submission.id).first.overall_vote.value %>
+				</p>
+			</td>
+			<td>
+				<%= submission.true_topic_option.value %>
+			</td>
+		</tr>
+	<% end %>
+	<% @topic.non_voted_submissions(current_user).shuffle.each do |submission| %>
+		<tr>
+			<td><%= link_to "RANDOMIZED", submission_url(submission) %></td>
+			<td><%= submission.votes.count %></td>
+			<% @topic.topic_options.each do |to| %>
+				<td></td>
+			<% end %>
+			<td></td>
+			<td></td>		
+		</tr>
+	<% end %>
+</table>
+<% if false %>
 	<%= link_to 'Edit Topic', edit_topic_path(@topic) %>
 <% end %>

@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
           </button>
           <div class="header-logo">
-          <%= link_to image_tag('miri_logo.png', width: '150px'), root_url, 'data-no-turbolink' => true %>
+          <%= link_to image_tag('logo.jpg', width: '50px'), "https://en.wikipedia.org/wiki/Alan_Turing", 'data-no-turbolink' => true %>
           </div>
         </div>
 
@@ -51,30 +51,30 @@
       </div><!-- /.container-fluid -->
     </nav>
 	  <% if current_user.present? %>
-	    <div class='col-md-2'>
+	    <div class='col-md-2 col-sm-2'>
 	    	<%= render '/users/sidebar' %>
 	    </div>
 	  <% end %>
-	  <div class='col-md-10'>
+	  <div class='col-md-10 col-sm-10'>
     	<%= yield %>
     </div>
   </div>
 </div>
 
 
-<footer class='col-md-12 no-pad footer'>
+<footer class='col-md-12 col-sm-12 no-pad footer'>
   <div id='footer'>
 
 
-      <div class='col-md-12 col-sm-12'>
+      <div class='col-md-12 col-sm-12 col-sm-12'>
         <center>
           <ul class='inline-list unstyled'>
-            <li><%= link_to 'HOME', root_url, 'data-no-turbolink' => true  %>  </li>  |
-            <li><%= link_to 'MIRI', "https://intelligence.org/", 'data-no-turbolink' => true  %>  </li>
+            <li><%= link_to 'Home', root_url, 'data-no-turbolink' => true  %>  </li>  |
+            <li><%= link_to 'Ideological Turing Test', "https://en.wikipedia.org/wiki/Ideological_Turing_Test", 'data-no-turbolink' => true  %>  </li>
 
             <% if current_user.present? %>
             |
-              <li><%= link_to "SIGN OUT", destroy_user_session_path, method: "delete" %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: "delete" %></li>
             <% end %>
           </ul>
        </center>

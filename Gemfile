@@ -49,6 +49,6 @@ end
 gem 'devise'
 
 gem 'rails4_client_side_validations'
-gem "wysiwyg-rails"
+gem 'ckeditor'
 
 

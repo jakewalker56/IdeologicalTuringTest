@@ -2,4 +2,4 @@
 <p>This person is actually a <%= @submission.true_topic_option.value %>.  <%= @submission.percentage_of_correct_votes %>% of people correctly identified the author's ideology, with an average confidence of <%= @submission.average_confidence_of_correct_votes %>%
   </p>
 
-  <p>Those who incorrectly identified the author's ideology were <%= @submission.average_confidence_of_incorrect_votes %>% confident in their incorrect guess</p>
+  <p>Those who incorrectly identified the author's ideology were on average <%= @submission.average_confidence_of_incorrect_votes %>% confident in their incorrect guess</p>

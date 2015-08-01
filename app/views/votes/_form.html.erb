@@ -3,11 +3,11 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :submission_id, value: @submission.id %>
   <div class="row">
-    <div class="form-group col-md-6 no-pad-right">
+    <div class="form-group col-md-6 col-sm-6 no-pad-right">
       <%= f.label "I think the author is really a..."%>
       <%= f.collection_select :overall_vote_id, @submission.topic.topic_options, :id, :value, prompt: "Actual Belief..." %>
     </div>
-    <div class="form-group col-md-6 no-pad-right">
+    <div class="form-group col-md-6 col-sm-6 no-pad-right">
       <%= f.label "Confidence (out of 100)"%><br>
       <%= f.number_field :confidence, placeholder: "99" %>
     </div>
