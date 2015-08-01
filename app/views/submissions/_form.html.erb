@@ -30,7 +30,7 @@
     </div> 
     <div class="row">
       <div class="form-group col-md-8 col-md-offset-2 no-pad-right">
-         <%= f.text_area :content, size: "80x20" %>
+         <%= f.text_area :content, size: "80x20", id: "edit" %>
       </div>
     </div> 
     <div class="actions">
@@ -38,3 +38,9 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+      $(function() {
+          $('#edit').editable({inlineMode: false})
+      });
+  </script>
