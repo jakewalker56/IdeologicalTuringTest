@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav" style='padding-left: 55px;'>
             <% if current_user.present? %>
-              <li> <%= link_to "My Profile", user_path(current_user), 'data-no-turbolink' => true %></li>
+              <li> <%= link_to "My Profile", votes_url, 'data-no-turbolink' => true %></li>
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
