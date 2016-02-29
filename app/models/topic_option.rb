@@ -1,4 +1,5 @@
 class TopicOption < ActiveRecord::Base
+	belongs_to :topic
 	has_many :submissions, foreign_key: :professed_topic_option_id
 	
 	def voted_submissions(user)

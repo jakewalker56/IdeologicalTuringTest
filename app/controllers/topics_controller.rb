@@ -8,6 +8,7 @@ class TopicsController < ApplicationController
   # GET /topics.json
   def index
     @topics = Topic.all
+    @show_new_topic = ENV["SHOW_NEW_TOPIC"].present? && ENV["SHOW_NEW_TOPIC"].downcase == "true"
   end
 
   # GET /topics/1

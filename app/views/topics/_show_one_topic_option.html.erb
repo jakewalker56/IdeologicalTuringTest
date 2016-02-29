@@ -1,24 +1,32 @@
 <h3><%= @topic.name %></h3>
-<h4><%= @topic_option.value %></h4>
+<h4>"<%= @topic_option.value %>"</h4>
 <table class='table table-bordered table-hover table-white'>
 	<tr>
 		<th>ID</th>
 		<th>Total Votes</th>
-		<% @topic.topic_options.each do |to| %>
-			<th><%= to.value %> votes</th>
+		<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+			<% @topic.topic_options.each do |to| %>
+				<th><%= to.value %> votes</th>
+			<% end %>
 		<% end %>
 		<th>Your Vote</th>
-		<th>Actual Belief</th>
+		<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+        	<th>Actual Belief</th>
+        <% end %>
 	</tr>
 	<% @topic_option.voted_submissions(current_user).each do |submission| %>
 		<tr>
-			<td><%= link_to submission.id, submission_url(submission) %></td>
+			<td><%= link_to "Already Voted", submission_url(submission) %></td>
 			<td><%= submission.votes.count %></td>
-			<% @topic.topic_options.each do |to| %>
-				<td><%= submission.votes.select{|v| v.overall_vote_id == to.id}.count %></td>
+			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+	        	<% @topic.topic_options.each do |to| %>
+					<td><%= submission.votes.select{|v| v.overall_vote_id == to.id}.count %></td>
+				<% end %>
 			<% end %>
 			<td>
-				<% if submission.true_topic_option == current_user.votes.where(submission_id: submission.id).first.overall_vote %>
+				<% if ENV["SHOW_RESULTS"].present? && ENV["SHOW_RESULTS"].downcase != "true"%>
+					<p>
+        		<% elsif submission.true_topic_option == current_user.votes.where(submission_id: submission.id).first.overall_vote %>
 					<p class="green-text">
 				<% else %>
 					<p class="red-text">
@@ -27,20 +35,30 @@
 				<%= current_user.votes.where(submission_id: submission.id).first.overall_vote.value %>
 				</p>
 			</td>
-			<td>
-				<%= submission.true_topic_option.value %>
-			</td>
+			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+				<td>
+					<%= submission.true_topic_option.value %>
+				</td>
+			<% end %>
 		</tr>
 	<% end %>
 	<% @topic_option.non_voted_submissions(current_user).shuffle.each do |submission| %>
 		<tr>
-			<td><%= link_to "RANDOMIZED", submission_url(submission) %></td>
+			<% if submission.user == current_user%>
+				<td><%= link_to "Your submission", submission_url(submission) %></td>
+			<% else %>
+				<td><%= link_to "VOTE NOW", submission_url(submission) %></td>
+			<% end %>
 			<td><%= submission.votes.count %></td>
-			<% @topic.topic_options.each do |to| %>
-				<td></td>
+			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+	        	<% @topic.topic_options.each do |to| %>
+					<td></td>
+				<% end %>
 			<% end %>
 			<td></td>
-			<td></td>		
+			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+				<td></td>		
+			<% end %>
 		</tr>
 	<% end %>
 </table>

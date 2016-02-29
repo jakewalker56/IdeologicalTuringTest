@@ -1,5 +1,12 @@
-<p>You thought this person held the <%= vote.overall_vote.value %> ideology with <%= vote.confidence %>% confidence</p>
-<p>This person actually held the <%= @submission.true_topic_option.value %> ideology.  <%= @submission.percentage_of_correct_votes %>% of people correctly identified the author's ideology, with an average confidence of <%= @submission.average_confidence_of_correct_votes %>%
-  </p>
+<p>You thought this person held the "<%= vote.overall_vote.value %>" ideology with <%= vote.confidence.to_i %>% confidence</p>
 
-  <p>Those who incorrectly identified the author's ideology were on average <%= @submission.average_confidence_of_incorrect_votes %>% confident in their incorrect guess</p>
+<% if !ENV["SHOW_SUBMIT_ANSWER"].present? || ENV["SHOW_SUBMIT_ANSWER"].downcase == "true"%>
+	If you want to change your vote, you can <%= link_to "delete your current vote", vote, method: :delete, data: { confirm: 'Are you sure?' } %> and vote again.
+<% end %>
+        
+<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+	<p>This person actually held the "<%= @submission.true_topic_option.value %>" ideology.  <%= 100 * @submission.percentage_of_correct_votes %>% of people correctly identified the author's ideology, with an average confidence of <%= @submission.average_confidence_of_correct_votes %>%
+	  </p>
+
+	  <p>Those who incorrectly identified the author's ideology were on average <%= @submission.average_confidence_of_incorrect_votes %>% confident in their incorrect guess</p>
+<% end %>

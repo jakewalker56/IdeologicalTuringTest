@@ -1,43 +1,59 @@
 <%= form_for(@submission) do |f| %>
   <div class="row">
-  <% if @submission.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+    <div class="col-md-12">
+    <% if @submission.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
-      <ul>
-      <% @submission.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @submission.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+     <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <% if @submission.topic.present? %>
+      <div class="row">
+        <div class="form-group col-md-6 col-sm-6 col-md-offset-1 no-pad-right">
+          <%= f.label "Topic:" %>
+          <%= f.hidden_field :topic_id %>
+          <p><%= @submission.topic.name %></p>
+          <% if false %>
+            <%= f.collection_select :topic_id, Topic.all, :id, :name,  { prompt: "Select Topic"}, {:onChange=>"javascript: this.form.submit();", class: 'form-control' } %>
+          <% end %>
+        </div>  
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6 col-sm-6 col-md-offset-1 no-pad-right">
+          <%= f.label "I'm writing this response as if I believe:" %>
+          <%= f.hidden_field :professed_topic_option_id %>
+          <p><%= @submission.professed_topic_option.value %></p>
+          <% if false %>
+            <%= f.collection_select :professed_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Submitting as..." %>
+          <% end %>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="form-group col-md-10 col-sm-10 col-md-offset-1 no-pad-right">
+          <%= f.label "But I actually believe:"%>
+          <%= f.collection_select :true_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Actual Belief..." %>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="form-group col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1 no-pad-right">
+           <%= f.cktext_area :content, rows: 25 %>
+        </div>
+      </div> 
+      <div class="actions">
+        <%= f.submit "Submit", class: 'btn btn-itt pull-right' %>
+      </div>
+    <% end %>
+    <br>
     </div>
-  <% end %>
-   <%= f.hidden_field :user_id, value: current_user.id %>
-  <div class="row">
-    <div class="form-group col-md-6 col-sm-6 col-md-offset-3 no-pad-right">
-     <%= f.collection_select :topic_id, Topic.all, :id, :name,  { prompt: "Select Topic"}, {:onChange=>"javascript: this.form.submit();", class: 'form-control' } %>
-    </div>  
-  </div>
-  
-  <% if @submission.topic.present? %>
-    <div class="row">
-      <div class="form-group col-md-6 col-sm-6 col-md-offset-3 no-pad-right">
-        <%= f.collection_select :professed_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Submitting as..." %>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="form-group col-md-6 col-sm-6 col-md-offset-3 no-pad-right">
-        <%= f.collection_select :true_topic_option_id, @submission.topic.topic_options, :id, :value, prompt: "Actual Belief..." %>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="form-group col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1 no-pad-right">
-         <%= f.cktext_area :content, rows: 25 %>
-      </div>
-    </div> 
-    <div class="actions">
-      <%= f.submit "Submit", class: 'btn btn-itt pull-right' %>
+    <br>
     </div>
+    <br>
   <% end %>
-  </div>
-<% end %>
 

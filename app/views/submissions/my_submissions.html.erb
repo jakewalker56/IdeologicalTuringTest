@@ -1,29 +1,38 @@
+<h3>Please submit responses to the below prompts</h3>
 <table class='table table-bordered table-hover table-white'>
   <thead>
     <tr>
-      <th>Topic</th>
-      <th>ID</th>
+      <th></th>
       <th>Written as...</th>
-      <th>But I actually believe...</th>
       <th></th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @submissions.each do |submission| %>
-      <tr>
-        <td><%= submission.topic.name %></td>
-        <td><%= submission.id %></td>
-        <td><%= submission.professed_topic_option.value %></td>
-        <td><%= submission.true_topic_option.value %></td>
-        <td><%= link_to 'View', submission %></td>
-        <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
-      </tr>
+    <% @topics.each do |topic| %>
+      <tr><td colspan="4"><%= topic.name %></td></tr>
+      <% topic.topic_options.each do |option| %>
+        <% submission = @submissions.select{|s| s.topic == topic && s.professed_topic_option == option}.first%>
+        <tr>
+        <% if submission.present? %>
+            <td></td>
+            <td><%= submission.professed_topic_option.value %></td>
+            <td><%= link_to 'View', submission %></td>
+            <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
+        <% else %>
+          <td></td>
+          <td><%= option.value %></td>
+          <td colspan="2"><%= link_to 'Submit Answer', new_submission_path(topic_option: option.id)%></td>
+        <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Submission', new_submission_path %>
+<% if false %>
+  <%= link_to 'New Submission', new_submission_path, class: "btn btn-itt" %>
+<% end %>

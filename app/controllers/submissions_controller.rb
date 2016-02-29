@@ -7,6 +7,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions.json
   def index
     @submissions = Submission.all
+    @topics = Topic.all
   end
 
   # GET /submissions/1
@@ -16,12 +17,18 @@ class SubmissionsController < ApplicationController
 
   def my_submissions
     @submissions = current_user.submissions
+    @topics = Topic.all
   end
 
 
   # GET /submissions/new
   def new
     @submission = Submission.new
+    if params[:topic_option].present?
+      topic_option = TopicOption.find(params[:topic_option].to_i)
+      @submission.professed_topic_option = topic_option
+      @submission.topic = topic_option.topic
+    end
   end
 
   # GET /submissions/1/edit

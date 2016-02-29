@@ -1,0 +1,45 @@
+<%= form_for(@user, validate: true) do |f| %>
+  <div class="col-md-8 col-md-offset-2">
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label "Booth Class" %>
+      <%= f.select :class_year, ['2014', '2015', '2016', 'Not a Booth student'], class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :gender %>
+      <%= f.select :gender, ['Male', 'Female'], class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :age%>
+      <%= f.text_field :age, placeholder: "age", class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :political_affiliation %>
+      <%= f.select :political_affiliation, ['Republican', 'Democrat', 'Independent', 'Other'], class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :citizenship_status %>
+      <%= f.select :citizenship_status, ['US Citizen', 'Not US Citizen'], class: 'form-control' %>
+    </div>
+    
+    
+    <div class="form-group">
+      <%= f.submit "Save User", class: 'btn btn-itt pull-right' %>
+    </div>
+  </div>
+<% end %>

@@ -14,5 +14,13 @@ We also randomize the order you are shown un-judged submissions... but then the 
 
 Mobile support is... basically not there.  I'm not a front end guy.
 
+TODO:
+Add class year
+Add gender
+Add age
+Add political affiliation
+Add citizenship status
+Add reason for information- we want to run an analysis at the end and see how everyone did
+
 
 

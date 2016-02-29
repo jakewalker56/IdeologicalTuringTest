@@ -28,17 +28,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <div class="header-logo">
-          <%= link_to image_tag('logo.jpg', width: '50px'), "https://en.wikipedia.org/wiki/Alan_Turing", 'data-no-turbolink' => true %>
-          </div>
+          <% if false%>
+            <div class="header-logo">
+            <%= link_to image_tag('logo.jpg', width: '50px'), "https://en.wikipedia.org/wiki/Alan_Turing", 'data-no-turbolink' => true %>
+            </div>
+          <% end %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <% if false%> 
+            <ul class="nav navbar-nav" style='padding-left: 55px;'>
+              <% if current_user.present? %>
+                <li> <%= link_to "My Profile", votes_url, 'data-no-turbolink' => true %></li>
+              <% end %>
+            </ul>
+          <% end %>
           <ul class="nav navbar-nav" style='padding-left: 55px;'>
-            <% if current_user.present? %>
-              <li> <%= link_to "My Profile", votes_url, 'data-no-turbolink' => true %></li>
-            <% end %>
+              <li><%= link_to "Ideological Turing Test",  "https://en.wikipedia.org/wiki/Ideological_Turing_Test" %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user.present? %>
@@ -51,11 +58,11 @@
       </div><!-- /.container-fluid -->
     </nav>
 	  <% if current_user.present? %>
-	    <div class='col-md-2 col-sm-2'>
+	    <div class='col-md-3 col-sm-3'>
 	    	<%= render '/users/sidebar' %>
 	    </div>
 	  <% end %>
-	  <div class='col-md-10 col-sm-10'>
+	  <div class='col-md-9 col-sm-9'>
     	<%= yield %>
     </div>
   </div>

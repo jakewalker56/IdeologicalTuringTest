@@ -6,8 +6,10 @@
       <th>Submission</th>
       <th>My Vote</th>
       <th>My Confidence</th>
-      <th>Correct Answer</th>
-      <th>Percentage of correct voters</th>
+      <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+        <th>Correct Answer</th>
+        <th>Percentage of correct voters</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -15,14 +17,18 @@
     <% @votes.each do |vote| %>
       <tr>
         <td><%= link_to "Submission #{vote.submission.id}", submission_url(vote.submission) %></td>
-        <% if vote.overall_vote == vote.submission.true_topic_option %>
+        <% if ENV["SHOW_RESULTS"].present? && ENV["SHOW_RESULTS"].downcase != "true"%>
+          <td><%= vote.overall_vote.value %></td>
+        <% elsif vote.overall_vote == vote.submission.true_topic_option %>
           <td class="green-text"><%= vote.overall_vote.value %></td>
         <% else %>
           <td class="red-text"><%= vote.overall_vote.value %></td>
         <% end %>
         <td><%= vote.confidence %></td>
-        <td><%= vote.submission.true_topic_option.value %></td>
-        <td><%= vote.submission.percentage_of_correct_votes %></td>
+        <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
+          <td><%= vote.submission.true_topic_option.value %></td>
+          <td><%= vote.submission.percentage_of_correct_votes %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
