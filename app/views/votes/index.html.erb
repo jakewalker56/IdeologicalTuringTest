@@ -27,7 +27,7 @@
         <td><%= vote.confidence.to_i %>%</td>
         <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
           <td><%= vote.submission.true_topic_option.value %></td>
-          <td><%= vote.submission.percentage_of_correct_votes %></td>
+          <td><%= (100 * vote.submission.percentage_of_correct_votes).to_i %>%</td>
         <% end %>
       </tr>
     <% end %>
