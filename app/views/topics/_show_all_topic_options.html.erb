@@ -24,7 +24,13 @@
 
 <table class='table table-bordered table-hover table-white'>
 	<tr>
-		<th>Vote Now</th>
+
+		<% if !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true"%>
+			<th>Vote Now</th>
+		<% else %>
+			<th>Read Content</th>
+		<% end %>
+
 		<th>Total Votes</th>
 		<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
 			<% @topic.topic_options.each do |to| %>
@@ -34,12 +40,16 @@
 		<th>Submitted as</th>
 		<th>You thought this person actually believed</th>
 		<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
-			<th>Actual Belief</th>
+			<th>This person actually believed</th>
 		<% end %>
 	</tr>
 	<% @topic.voted_submissions(current_user).each do |submission| %>
 		<tr>
-			<td><%= link_to "Already Voted", submission_url(submission) %></td>
+			<% if !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true"%>
+				<td><%= link_to "Read Submission #" + submission.id.to_s, submission_url(submission) %></td>
+			<% else %>
+				<td><%= link_to "Already Voted", submission_url(submission) %></td>
+			<% end %>
 			<td><%= submission.votes.count %></td>
 			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
 				<% @topic.topic_options.each do |to| %>
@@ -70,8 +80,10 @@
 		<tr>
 			<% if submission.user == current_user%>
 				<td><%= link_to "Your submission", submission_url(submission) %></td>
-			<% else %>
+			<% elsif !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true"%>
 				<td><%= link_to "VOTE NOW", submission_url(submission) %></td>
+			<% else %>
+				<td><%= link_to "Read Submission #" + submission.id.to_s, submission_url(submission) %></td>
 			<% end %>
 			<td><%= submission.votes.count %></td>
 			<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   resources :submissions
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   root to: "topics#index"
   resources :votes
   resources :users do

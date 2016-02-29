@@ -16,7 +16,7 @@
 
     <% if @submission.topic.present? %>
       <div class="row">
-        <div class="form-group col-md-6 col-sm-6 col-md-offset-1 no-pad-right">
+        <div class="form-group col-md-8 col-sm-8 col-md-offset-1 no-pad-right">
           <%= f.label "Topic:" %>
           <%= f.hidden_field :topic_id %>
           <p><%= @submission.topic.name %></p>
@@ -26,7 +26,7 @@
         </div>  
       </div>
       <div class="row">
-        <div class="form-group col-md-6 col-sm-6 col-md-offset-1 no-pad-right">
+        <div class="form-group col-md-8 col-sm-8 col-md-offset-1 no-pad-right">
           <%= f.label "I'm writing this response as if I believe:" %>
           <%= f.hidden_field :professed_topic_option_id %>
           <p><%= @submission.professed_topic_option.value %></p>

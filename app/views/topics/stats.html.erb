@@ -15,7 +15,7 @@
 			<td><%= @topic.submissions.select{|s| s.true_topic_option == s.professed_topic_option }.count %></td>
 			<% if  @topic.votes.present? %>
 				<td><%= @topic.votes.count %></td>
-				<td><%= @topic.correct_votes.count / @topic.votes.count %></td>
+				<td><%= (100 * @topic.correct_votes.count / @topic.votes.count).to_i %>%</td>
 			<% else %>
 				<td>0</td>
 				<td>N/A</td>
