@@ -17,7 +17,7 @@
       </li>
     <% end %>
     
-    <% if !ENV["SHOW_VOTE_HISTORY"].present? || ENV["SHOW_VOTE_HISTORY"].downcase == "true" %>
+    <% if !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true" %>
       <li>
         <a href="<%= votes_url %>">My Vote History</a>
       </li>

@@ -3,7 +3,7 @@
     <tr>
       <th>Topic</th>
       <th>Submissions</th>
-      <% if !ENV["SHOW_STATS_LINK"].present? || ENV["SHOW_STATS_LINK"].downcase == "true"%>
+      <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
         <th>Stats link</th>
       <% end %>
       <% if false %>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to topic.name, topic %></td>
         <td><%= topic.submissions.count %></td>
-        <% if !ENV["SHOW_STATS_LINK"].present? || ENV["SHOW_STATS_LINK"].downcase == "true"%>
+        <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
           <td><%= link_to "Stats", topic_stats_url(topic), class: "btn btn-itt" %></td>
         <% end %>
         <% if false%>

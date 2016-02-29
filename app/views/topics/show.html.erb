@@ -1,4 +1,4 @@
-<% if !ENV["SHOW_STATS_LINK"].present? || ENV["SHOW_STATS_LINK"].downcase == "true"%>
+<% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true"%>
    <%= link_to "See Topic Stats", topic_stats_url(@topic), class: "btn btn-itt" %>
 <% end %>
 <% if @topic_option.present? %>
