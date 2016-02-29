@@ -10,7 +10,9 @@
 		</div>
 	</div>
 </div>
-<% if !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true" %>
+<% if (!ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true") ||
+	(!ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true")
+ %>
 	<% if current_user == @submission.user %>
 		<p>You submitted this response at <%= @submission.created_at %></p>
 		<%= render '/votes/summary', vote: nil %>
