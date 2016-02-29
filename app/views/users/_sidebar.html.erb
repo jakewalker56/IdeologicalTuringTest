@@ -16,8 +16,15 @@
          <a href="<%= topics_url %>">Judge Answers</a> 
       </li>
     <% end %>
+
+    <% if !ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true" %>
+      <li>
+         <a href="<%= topics_url %>">Results by Topic</a> 
+      </li>
+    <% end %>
     
-    <% if !ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true" %>
+    <% if (!ENV["SHOW_JUDGE_ANSWERS"].present? || ENV["SHOW_JUDGE_ANSWERS"].downcase == "true")  ||
+      (!ENV["SHOW_RESULTS"].present? || ENV["SHOW_RESULTS"].downcase == "true") %>
       <li>
         <a href="<%= votes_url %>">My Vote History</a>
       </li>
